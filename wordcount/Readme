@@ -1,0 +1,70 @@
+
+
+NAME: SAMPATHKUMAR KILAPARTHI
+email: kilaparthi.sampathkumar@stonybrook.edu
+phone: +1 631 310 7281
+
+How to run code:
+
+1. make clean
+2. make wordvec
+3. ./wordvec inp.txt
+
+
+This test covers a simple sanity check whether functions are behaving as expected. 
+How to run test:
+1. make unitest
+2. ./unitest unit_test_input.txt
+
+
+
+The code is written in a non blocking way.
+The complete code is written in C++. 
+
+typedef unordered_map< string, int > wordcount;
+typedef unordered_map< string, unordered_set<string> > wordfile;
+typedef unordered_map <string, wordcount > filewordcount;
+
+
+wordcount      : dictionary of words and its count
+filewordcount  : dictionary of file and it wordcount
+wordfile       : dictionary of words and related files it is present in.
+
+
+
+Solution:
+    1.  Read inputs
+        parse input and return appropriate error.
+    2.  Get file names using getinputpaths()
+    3.  Process each file and create wordcount dictionary. processfile()
+            process the words and increment the wordcount dictionary. processwords().
+        
+        These local wordcount dictionaries are written to global filewordcount dictionary.
+
+    Improvement: We can make use of threads to fasten the file reading.
+                And since we create a local word dictionary for each file. It is 
+                non blocking. These threads won't interfere with each other except when 
+                writing to shared resource. And appropriate mutex locks are used wherever 
+                needed.
+
+    4. Now we should process the whole data.
+        cummulate the frequency of each word in every file.
+        Also we populate  a wordfile data sructure which contains the set of all files that
+        contain a given word.
+    
+    5. Result:
+        The result is now forwarded to result.txt file using printwordcount() function.
+
+    6. Bonus:
+        We can select any word from the list and get the relevant tokeninfo using tokeninfo()
+        function.
+        a. This prints all the files that contain the given word and their respective local count.
+        b. It also prints the cummulative score of the word.
+
+    Note: typing exit() closes the CLI interface.
+
+
+
+
+
+    
