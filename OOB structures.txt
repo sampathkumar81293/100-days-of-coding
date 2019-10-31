@@ -1,0 +1,27 @@
+
+// examples of OOB data structures
+struct bar {
+  int i;
+  float f;
+  char name[0]; // sometimes buf[1]
+};
+
+struct bar *object;
+object = malloc(sizeof(struct bar) + N); // N is the length of string + 1
+fgets(object->name, N, STDIN);
+printf("%s\n", object->name);
+
+
+
+struct bar {
+  int i;
+  float f;
+  char *name;
+}；
+int main(int argc, char **argv)
+{
+  struct bar *object;
+  object = malloc(sizeof(struct bar) + N);
+  object->name = (char *)((void *)object + sizeof(struct bar));
+  // todo ...
+}
